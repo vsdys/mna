@@ -21,7 +21,7 @@ export default function Quiz() {
   const [result, setResult] = useState<QuizResult | null>(null);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/quiz')
+    axios.get('${process.env.NEXT_PUBLIC_BACKEND_URL}/quiz')
       .then(res => setQuestions(res.data))
       .catch(err => console.error(err));
   }, []);
@@ -38,7 +38,7 @@ export default function Quiz() {
       selectedOption: answers[q.id]
     }));
   
-    axios.post('http://localhost:5000/quiz/submit', { answers: formattedAnswers })
+    axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/quiz/submit`, { answers: formattedAnswers })
       .then(res => setResult(res.data))
       .catch(err => console.error(err));
   };
