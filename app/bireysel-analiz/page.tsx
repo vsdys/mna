@@ -21,7 +21,7 @@ export default function Quiz() {
   const [result, setResult] = useState<QuizResult | null>(null);
 
   useEffect(() => {
-    axios.get('${process.env.NEXT_PUBLIC_BACKEND_URL}/quiz')
+    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/quiz`)
       .then(res => setQuestions(res.data))
       .catch(err => console.error(err));
   }, []);

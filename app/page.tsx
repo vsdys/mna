@@ -19,7 +19,7 @@ export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    axios.get('${process.env.NEXT_PUBLIC_BACKEND_URL}/articles')
+    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/articles`)
       .then(res => setArticles(res.data))
       .catch(err => console.error(err));
   }, []);
