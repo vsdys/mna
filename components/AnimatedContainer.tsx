@@ -1,7 +1,13 @@
 'use client';
-import { motion } from 'framer-motion';
 
-export default function AnimatedContainer({ children }: { children: React.ReactNode }) {
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
+
+interface AnimatedContainerProps {
+  children: ReactNode;
+}
+
+export default function AnimatedContainer({ children }: AnimatedContainerProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
