@@ -13,6 +13,20 @@ type Article = {
   imageUrl?: string;
 };
 
+// app/[category]/page.tsx
+
+export async function generateStaticParams() {
+  return [
+    { category: 'boykot' },
+    { category: 'para' },
+    { category: 'manipulasyon' },
+    { category: 'hukuksuzluk' },
+    { category: 'guncel-haberler' },
+    { category: 'halk-problemler' },
+    // Add all categories you want pre-rendered
+  ];
+}
+
 export default function CategoryPage() {
   const { category } = useParams();
   const [articles, setArticles] = useState<Article[]>([]);
@@ -23,6 +37,8 @@ export default function CategoryPage() {
       .then((res) => setArticles(res.data))
       .catch((err) => console.error(err));
   }, [category]);
+
+  
 
   return (
     <AnimatedContainer>
