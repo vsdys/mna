@@ -19,8 +19,9 @@
   }
 }
 
+/* styles/global.css */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #0a0a23, #170047, #000000);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
 }

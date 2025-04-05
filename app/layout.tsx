@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 // SEO metadata
@@ -49,10 +50,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
       >
-        <nav className="bg-gray-800 p-4 flex gap-6">
-          <Link href="/">Anasayfa</Link>
-          <Link href="/bireysel-analiz">Bireysel Analiz</Link>
-        </nav>
+        <nav className="bg-[#1a1a2e]/80 backdrop-blur-lg px-6 py-4 flex justify-between items-center border-b border-[#3b3b5a] shadow-md">
+  <div className="text-2xl font-bold tracking-wide text-white">Tarafsız Bakış</div>
+  <ul className="flex flex-wrap gap-5 text-sm text-white">
+    <li><Link href="/">Anasayfa</Link></li>
+    <li><Link href="/guncel-haberler">Güncel Haberler</Link></li>
+    <li><Link href="/boykot">Boykot</Link></li>
+    <li><Link href="/para">Para</Link></li>
+    <li><Link href="/bireysel-analiz">Bireysel Analiz</Link></li>
+  </ul>
+</nav>
         <main className="p-6">{children}</main>
       </body>
     </html>
