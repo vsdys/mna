@@ -20,7 +20,15 @@ async function getArticle(id: string): Promise<Article | null> {
   }
 }
 
-export default async function ArticleDetailPage({ params }: { params: { id: string } }) {
+import { GetStaticPropsContext } from 'next'; // optional, depending on your setup
+
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function ArticleDetailPage({ params }: PageProps) {
   const article = await getArticle(params.id);
 
   if (!article) return notFound();
