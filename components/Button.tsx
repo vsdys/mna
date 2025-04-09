@@ -11,8 +11,8 @@ export default function Button({
       <button
         onClick={onClick}
         disabled={disabled}
-        className="bg-blue-600 hover:bg-blue-700 transition text-white py-2 px-4 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
-      >
+        className="inline-block bg-[#1e60f5] hover:bg-[#4183ff] text-white font-bold py-2 px-6 rounded-lg transition-all shadow-lg"
+        >
         {children}
       </button>
     );

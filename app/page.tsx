@@ -7,21 +7,23 @@ import Link from 'next/link';
 import ArticleCard from '@/components/ArticleCard';
 import Button from '@/components/Button';
 import AnimatedContainer from '@/components/AnimatedContainer';
-import ClientOnlyChart from '@/components/ClientOnlyChart'; // ✅ Correctly imported
+import ClientOnlyChart from '@/components/ClientOnlyChart';
 
 type Article = {
   id: number;
   title: string;
   content: string;
+  imageUrl?: string;
 };
 
-export default function Home() {
+export default function HomePage() {
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/articles`)
-      .then(res => setArticles(res.data))
-      .catch(err => console.error(err));
+    axios
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/articles`)
+      .then((res) => setArticles(res.data))
+      .catch((err) => console.error(err));
   }, []);
 
   const handleSubmit = () => {
@@ -29,44 +31,60 @@ export default function Home() {
   };
 
   return (
-    <AnimatedContainer>
-      <div className="container mx-auto p-4 bg-gray-900 text-white min-h-screen">
-        <nav className="flex justify-between bg-gray-800 p-3 rounded-lg shadow-md">
-          <div className="font-bold text-lg">Tarafsız Bakış</div>
-          <ul className="flex space-x-4 text-sm items-center">
-            <li><Link href="/">Güncel Haberler</Link></li>
-            <li><Link href="/halk-ici-problemler">Halk İçi Problemler</Link></li>
-            <li><Link href="/devlet-halka-borcludur">Devlet Halka Borçludur</Link></li>
-            <li><Link href="/hukuksuzluk">Hukuksuzluk</Link></li>
-            <li><Link href="/manipulasyon-araclari">Manipülasyon Araçları</Link></li>
-            <li><Link href="/para">Para</Link></li>
-            <li><Link href="/boykot">Boykot</Link></li>
-            <li><Link href="/bireysel-analiz">Bireysel Analiz</Link></li>
-          </ul>
-        </nav>
+    <>
+      {/* Hero Section */}
+      <section className="relative w-full h-[50vh] flex flex-col items-center justify-center text-center px-6">
+        <div className="z-10">
+          <h1 className="text-5xl font-extrabold text-white drop-shadow-lg">Politik Analiz</h1>
+          <p className="mt-4 text-lg text-[#cbd5e1] max-w-xl mx-auto">
+            Türkiye’nin politik yapısına ve kişisel konumunuza objektif bir bakışa hazır mısınız?
+          </p>
+          <a
+            href="/bireysel-analiz"
+            className="mt-6 inline-block bg-[#1e60f5] hover:bg-[#4183ff] text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition-all"
+          >
+            Testi Başlat
+          </a>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#102a43]/1000 to-black"></div>
+      </section>
 
-        <section className="mt-12">
-          <h2 className="text-2xl font-semibold border-b border-gray-700 pb-2">Öne Çıkan Haberler</h2>
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {articles.map(article => (
-              <ArticleCard key={article.id} title={article.title} content={article.content} />
-            ))}
-          </div>
-        </section>
+      {/* Main content */}
+      <AnimatedContainer>
+      <div className="container mx-auto p-4 bg-gradient-to-b from-[#0a0f1c]/60 via-[#1c2f4a]/50 to-black/60 text-white min-h-screen rounded-xl shadow-inner">
+          {/* Featured Articles */}
+          <section className="mt-12">
+  <h2 className="text-2xl font-semibold border-b border-gray-700 pb-2">Son Eklenenler</h2>
+  <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {articles.map((article) => (
+      <ArticleCard
+      key={article.id}
+      title={article.title}
+      content={article.content}
+      imageUrl={article.imageUrl}
+      link={`/articles/${article.id}`} // ✅ This is crucial
+    />
+    ))}
+  </div>
+</section>
 
-        <section className="mt-16">
-          <h2 className="text-xl font-semibold mb-4">Deneme Butonu</h2>
-          <Button onClick={handleSubmit}>Sonuçları Göster</Button>
+          {/* Example Button & Chart */}
+          <section className="mt-16">
+            <h2 className="text-xl font-semibold mb-4">Deneme Butonu</h2>
+            <Button onClick={handleSubmit}>Sonuçları Göster</Button>
 
-          <div className="mt-8">
-            <ClientOnlyChart data={[
-              { subject: 'Ekonomi', value: 7 },
-              { subject: 'Özgürlük', value: 8 },
-              { subject: 'Geleneksellik', value: 3 }
-            ]} />
-          </div>
-        </section>
-      </div>
-    </AnimatedContainer>
+            <div className="mt-8">
+              <ClientOnlyChart
+                data={[
+                  { subject: 'Ekonomi', value: 7 },
+                  { subject: 'Özgürlük', value: 8 },
+                  { subject: 'Geleneksellik', value: 3 },
+                ]}
+              />
+            </div>
+          </section>
+        </div>
+      </AnimatedContainer>
+    </>
   );
 }

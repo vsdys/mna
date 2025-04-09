@@ -14,7 +14,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 // SEO metadata
@@ -23,7 +22,6 @@ export const metadata: Metadata = {
   description: "Tarafsız politik analiz ve haber platformu",
 };
 
-// Layout with Google Analytics
 export default function RootLayout({
   children,
 }: {
@@ -48,19 +46,53 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
+        className={`
+        ${geistSans.variable} ${geistMono.variable} antialiased 
+        bg-gradient-to-bl from-[#0a0f1c] via-[#1c2f4a] to-black 
+        text-white min-h-screen
+      `}
       >
-        <nav className="bg-[#1a1a2e]/80 backdrop-blur-lg px-6 py-4 flex justify-between items-center border-b border-[#3b3b5a] shadow-md">
-  <div className="text-2xl font-bold tracking-wide text-white">Tarafsız Bakış</div>
-  <ul className="flex flex-wrap gap-5 text-sm text-white">
-    <li><Link href="/">Anasayfa</Link></li>
-    <li><Link href="/guncel-haberler">Güncel Haberler</Link></li>
-    <li><Link href="/boykot">Boykot</Link></li>
-    <li><Link href="/para">Para</Link></li>
-    <li><Link href="/bireysel-analiz">Bireysel Analiz</Link></li>
-  </ul>
-</nav>
-        <main className="p-6">{children}</main>
+        {/* Navigation */}
+        <nav className="fixed top-0 left-0 w-full z-50 bg-[#1a2539]/80 backdrop-blur-md shadow-md border-b border-[#2c3e50] px-8 py-4 flex justify-between items-center">
+          <div className="text-2xl font-bold tracking-wider text-white">Objektif Türkiye</div>
+          <ul className="flex flex-wrap gap-6 text-sm font-medium text-[#cbd5e1]">
+            <li><Link href="/">Anasayfa</Link></li>
+            <li><Link href="/guncel-haberler">Güncel Haberler</Link></li>
+            <li><Link href="/halk-problemler">Halk Problemleri</Link></li>
+            <li><Link href="/devlet-halka-borcludur">Devlet ve Halk</Link></li>
+            <li><Link href="/boykot">Boykot</Link></li>
+            <li><Link href="/para">Para Meselesi</Link></li>
+            <li><Link href="/bireysel-analiz">Politik Analiz</Link></li>
+          </ul>
+        </nav>
+
+        {/* Page content */}
+        <main className="pt-28 px-6">{children}</main>
+
+        {/* Footer */}
+        <footer className="mt-16 bg-[#0f172a] text-[#cbd5e1] py-10 px-6 border-t border-[#2c3e50]">
+          <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm">© 2025 Objektif Türkiye. Tüm hakları saklıdır.</p>
+            <div className="flex gap-6 mt-4 md:mt-0 text-sm">
+              <Link href="/gizlilik">Gizlilik</Link>
+              <Link href="/iletisim">İletişim</Link>
+              <a
+                href="https://www.instagram.com/seninhesabin"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://www.tiktok.com/@seninhesabin"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                TikTok
+              </a>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
